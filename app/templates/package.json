@@ -1,8 +1,8 @@
 {
-  "name": "docpad-plugin-yourpluginname",
+  "name": "docpad-plugin-<%= appname %>",
   "version": "2.0.0",
   "description": "DocPad plugin that adds the ability to render Something to Something Else",
-  "homepage": "https://github.com/yourgithubusername/docpad-plugin-yourpluginname",
+  "homepage": "https://github.com/yourgithubusername/docpad-plugin-<%= appname %>",
   "keywords": [
     "docpad",
     "docpad-plugin",
@@ -17,11 +17,11 @@
     "balupton (https://github.com/balupton)"
   ],
   "bugs": {
-    "url": "https://github.com/docpad/docpad-plugin-yourpluginname/issues"
+    "url": "https://github.com/docpad/docpad-plugin-<%= appname %>/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/docpad/docpad-plugin-yourpluginname.git"
+    "url": "https://github.com/docpad/docpad-plugin-<%= appname %>.git"
   },
   "engines": {
     "node": ">=0.8"
@@ -35,9 +35,9 @@
     "docpad": "6",
     "projectz": "~0.3.13"
   },
-  "main": "./out/yourpluginname.plugin.js",
+  "main": "./out/<%= appname %>.plugin.js",
   "scripts": {
-    "test": "node ./out/yourpluginname.test.js"
+    "test": "node ./out/<%= appname %>.test.js"
   },
   "license": {
     "type": "MIT"

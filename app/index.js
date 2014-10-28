@@ -33,7 +33,15 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
 
   writing: {
     app: function () {
-      this.directory('.', '.');
+
+
+      //this.directory('.', '.');
+    },
+    projectfiles: function () {
+      var options = { dot: true, cwd: this.sourceRoot()};
+      this.expandFiles('*', options).forEach(function (file) {
+        this.copy(file, file);
+      }.bind(this));
     }
   },
 
