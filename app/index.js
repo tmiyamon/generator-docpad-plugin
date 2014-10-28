@@ -4,17 +4,36 @@ var path = require('path');
 var yeoman = require('yeoman-generator');
 var yosay = require('yosay');
 
+var initAppOptions = function (gen) {
+  var appOptions = {};
+  var _ = gen._;
+
+  var appname = gen.appname || path.basename(process.cwd());
+
+  var slugged = _.slugify(_.humanize(appname));
+  var match = slugged.match(/^docpad-plugin-(.+)/);
+
+  if (match && match.length === 2) {
+    appOptions.pluginName = match[1].toLowerCase();
+  } else {
+    appOptions.pluginName = slugged;
+  }
+
+  return appOptions;
+};
+
 var DocpadPluginGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
 
     this.argument('appname', { type: String, required: false });
-    this.appname = this.appname || path.basename(process.cwd());
-    this.appname = this._.slugify(this._.humanize(this.appname));
+
+    this.appOptions = initAppOptions(this);
   },
 
   prompting: function () {
     var done = this.async();
+    var appOptions = this.appOptions;
 
     // Have Yeoman greet the user.
     this.log(yosay(
@@ -22,15 +41,14 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
     ));
 
     var prompts = [{
-      type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
-      default: true
+      name: 'pluginName',
+      message: 'What\'s the base name of your docpad plugin?',
+      default: appOptions.pluginName
     }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
-      this.classname = this._.classify(this.appname);
+      this.appOptions.pluginName = props.pluginName;
+      this.appOptions.classname = this._.classify(props.pluginName);
 
       done();
     }.bind(this));
@@ -40,7 +58,7 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
     app: function () {
 
       ['.plugin.coffee', '.test.coffee'].forEach(function (ext) {
-        this.copy('src/yourpluginname' + ext, path.join('src', this.appname + ext));
+        this.copy('src/yourpluginname' + ext, path.join('src', this.appOptions.pluginName + ext));
       }.bind(this));
 
       this.directory('./test', './test');

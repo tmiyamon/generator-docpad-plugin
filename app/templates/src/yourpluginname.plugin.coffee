@@ -1,9 +1,9 @@
 # Export Plugin
 module.exports = (BasePlugin) ->
 	# Define Plugin
-	class <%= classname %>Plugin extends BasePlugin
+	class <%= appOptions.classname %>Plugin extends BasePlugin
 		# Plugin name
-		name: '<%= appname %>'
+		name: '<%= appOptions.pluginName %>'
 
 		# Render
 		# Called per document, for each extension conversion. Used to render one extension to another.
