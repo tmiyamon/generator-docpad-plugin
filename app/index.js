@@ -7,6 +7,10 @@ var yosay = require('yosay');
 var DocpadPluginGenerator = yeoman.generators.Base.extend({
   initializing: function () {
     this.pkg = require('../package.json');
+
+    this.argument('appname', { type: String, required: false });
+    this.appname = this.appname || path.basename(process.cwd());
+    this.appname = this._.slugify(this._.humanize(this.appname));
   },
 
   prompting: function () {
