@@ -26,6 +26,7 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
 
     this.prompt(prompts, function (props) {
       this.someOption = props.someOption;
+      this.classname = this._.classify(this.appname);
 
       done();
     }.bind(this));
@@ -34,11 +35,15 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
   writing: {
     app: function () {
 
+      ['.plugin.coffee', '.test.coffee'].forEach(function (ext) {
+        this.copy('src/yourpluginname' + ext, path.join('src', this.appname + ext));
+      }.bind(this));
 
-      //this.directory('.', '.');
+      this.directory('./test', './test');
     },
+
     projectfiles: function () {
-      var options = { dot: true, cwd: this.sourceRoot()};
+      var options = { dot: true, cwd: this.sourceRoot() };
       this.expandFiles('*', options).forEach(function (file) {
         this.copy(file, file);
       }.bind(this));

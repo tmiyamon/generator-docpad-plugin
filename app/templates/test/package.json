@@ -1,5 +1,5 @@
 {
-  "name": "docpad-plugin-yourpluginname-testsite",
+  "name": "docpad-plugin-<%= appname %>-testsite",
   "version": "0.1.0",
   "private": true
 }
