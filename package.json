@@ -1,13 +1,13 @@
 {
   "name": "generator-docpad-plugin",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
   "repository": "tmiyamon/generator-docpad-plugin",
   "author": {
-    "name": "",
-    "email": "",
+    "name": "Takuya Miyamoto",
+    "email": "miyamototakuya@gmail.com",
     "url": "https://github.com/tmiyamon"
   },
   "engines": {
