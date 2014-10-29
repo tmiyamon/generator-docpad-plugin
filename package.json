@@ -20,7 +20,9 @@
     "app"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "docpad",
+    "plugin"
   ],
   "dependencies": {
     "yeoman-generator": "^0.17.0",
