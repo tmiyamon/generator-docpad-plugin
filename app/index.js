@@ -44,10 +44,16 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
       name: 'pluginName',
       message: 'What\'s the base name of your docpad plugin?',
       default: appOptions.pluginName
-    }];
+    }, {
+      name: 'githubUser',
+      message: 'What\'s the name of your github account?'
+    } ];
 
     this.prompt(prompts, function (props) {
-      this.appOptions.pluginName = props.pluginName;
+      ['pluginName', 'githubUser'].forEach(function (key) {
+        this.appOptions[key] = props[key];
+      }.bind(this));
+
       this.appOptions.classname = this._.classify(props.pluginName);
 
       done();
