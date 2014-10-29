@@ -12,17 +12,41 @@ describe('docpad-plugin:app', function () {
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
       .withPrompt({
-        someOption: true
+        pluginName: 'sample',
+        githubUser: 'sampleUser'
       })
       .on('end', done);
   });
 
   it('creates files', function () {
-    assert.file([
-      'bower.json',
-      'package.json',
+    var expected = [
       '.editorconfig',
-      '.jshintrc'
-    ]);
+      '.gitignore',
+      '.npmignore',
+      '.travis.yml',
+      'CONTRIBUTING.md',
+      'Cakefile',
+      'HISTORY.md',
+      'LICENSE.md',
+      'README.md',
+      'package.json',
+      'src/sample.plugin.coffee',
+      'src/sample.test.coffee'
+    ]
+    assert.file(expected);
   });
+
+  it('fills package.json with correct information', function () {
+    assert.fileContent('package.json',  /"name": "docpad-plugin-sample"/);
+  });
+
+  describe('app files', function () {
+    it('fills plugin with correct class name', function () {
+      assert.fileContent('src/sample.plugin.coffee',  /class SamplePlugin/);
+    });
+
+    it('fills plugin with correct plugin name', function () {
+      assert.fileContent('src/sample.plugin.coffee',  /name: 'sample'/);
+    });
+  })
 });

@@ -79,7 +79,9 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
   },
 
   end: function () {
-    this.installDependencies();
+    if (!this.options['skip-install']) {
+      this.installDependencies();
+    }
   }
 });
 
