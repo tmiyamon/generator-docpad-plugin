@@ -72,7 +72,12 @@ var DocpadPluginGenerator = yeoman.generators.Base.extend({
 
     projectfiles: function () {
       var options = { dot: true, cwd: this.sourceRoot() };
-      this.expandFiles('*', options).forEach(function (file) {
+
+      this.expandFiles('_*', options).forEach(function (file) {
+        this.copy(file, '.' + file.slice(1));
+      }.bind(this));
+
+      this.expandFiles('[^_]*', options).forEach(function (file) {
         this.copy(file, file);
       }.bind(this));
     }
